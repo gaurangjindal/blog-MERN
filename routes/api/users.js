@@ -33,12 +33,13 @@ router.post('/signup',(req,res)=>{
                     newUser.save()
                             .then(user =>res.json(user))
                             .catch( err =>console.log({error:'error creating new user'}))
-                })
-            })
-        }
-    })
+                });
+            });
+         //   return res.send(200).json('new user created');
+        };
+    });
 
-})
+});
 
 router.post('/login',(req,res)=>{
     const{errors,isvalid} = validateSigninInput(req.body);
@@ -62,6 +63,7 @@ router.post('/login',(req,res)=>{
                 jwt.sign(payload,SECRET,{expiresIn:3600},(err,token)=>{
                     if(err){
                         console.log(err);
+                        
                     }
                     return res.json({
                         success:true,
